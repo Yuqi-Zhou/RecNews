@@ -317,42 +317,50 @@ def init_args():
 if __name__ == "__main__":
     args = init_args()
     
-    print("Process data for training ")
+    # print("Process data for training ")
     
-    print('Parse behaviors')
-    parse_behaviors(path.join(args.train_dir, 'behaviors.tsv'),
-                    path.join(args.train_dir, 'behaviors_parsed.tsv'),
-                    path.join(args.train_dir, 'user2int.tsv'))
+    # print('Parse behaviors')
+    # parse_behaviors(path.join(args.train_dir, 'behaviors.tsv'),
+    #                 path.join(args.train_dir, 'behaviors_parsed.tsv'),
+    #                 path.join(args.train_dir, 'user2int.tsv'))
     
-    print('Parse news')
-    parse_news(path.join(args.train_dir, 'news.tsv'),
-               path.join(args.train_dir, 'news_parsed.tsv'),
-               path.join(args.train_dir, 'category2int.tsv'),
-               path.join(args.train_dir, 'word2int.tsv'),
-               path.join(args.train_dir, 'entity2int.tsv'),
-               mode='train')
-    
-    print('Generate word embedding')
-    generate_word_embedding(
-        f'./data/glove/glove.840B.{config.word_embedding_dim}d.txt',
-        path.join(args.train_dir, 'pretrained_word_embedding.npy'),
-        path.join(args.train_dir, 'word2int.tsv'))
-    
-    print('Transform entity embeddings')
-    transform_entity_embedding(
-        path.join(args.train_dir, 'entity_embedding.vec'),
-        path.join(args.train_dir, 'pretrained_entity_embedding.npy'),
-        path.join(args.train_dir, 'entity2int.tsv'))
-    
-    print('\nProcess data for validation')
+    # parse_behaviors(path.join(args.val_dir, 'behaviors.tsv'),
+    #                 path.join(args.val_dir, 'behaviors_parsed.tsv'),
+    #                 path.join(args.val_dir, 'user2int.tsv'))
 
-    print('Parse news')
-    parse_news(path.join(args.val_dir, 'news.tsv'),
-               path.join(args.val_dir, 'news_parsed.tsv'),
-               path.join(args.train_dir, 'category2int.tsv'),
-               path.join(args.train_dir, 'word2int.tsv'),
-               path.join(args.train_dir, 'entity2int.tsv'),
-               mode='test')
+    # parse_behaviors(path.join(args.test_dir, 'behaviors.tsv'),
+    #                 path.join(args.test_dir, 'behaviors_parsed.tsv'),
+    #                 path.join(args.test_dir, 'user2int.tsv'))
+    
+    # print('Parse news')
+    # parse_news(path.join(args.train_dir, 'news.tsv'),
+    #            path.join(args.train_dir, 'news_parsed.tsv'),
+    #            path.join(args.train_dir, 'category2int.tsv'),
+    #            path.join(args.train_dir, 'word2int.tsv'),
+    #            path.join(args.train_dir, 'entity2int.tsv'),
+    #            mode='train')
+    
+    # print('Generate word embedding')
+    # generate_word_embedding(
+    #     f'./data/glove/glove.840B.{config.word_embedding_dim}d.txt',
+    #     path.join(args.train_dir, 'pretrained_word_embedding.npy'),
+    #     path.join(args.train_dir, 'word2int.tsv'))
+    
+    # print('Transform entity embeddings')
+    # transform_entity_embedding(
+    #     path.join(args.train_dir, 'entity_embedding.vec'),
+    #     path.join(args.train_dir, 'pretrained_entity_embedding.npy'),
+    #     path.join(args.train_dir, 'entity2int.tsv'))
+    
+    # print('\nProcess data for validation')
+
+    # print('Parse news')
+    # parse_news(path.join(args.val_dir, 'news.tsv'),
+    #            path.join(args.val_dir, 'news_parsed.tsv'),
+    #            path.join(args.train_dir, 'category2int.tsv'),
+    #            path.join(args.train_dir, 'word2int.tsv'),
+    #            path.join(args.train_dir, 'entity2int.tsv'),
+    #            mode='test')
     
     print('\nProcess data for test')
 

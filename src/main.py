@@ -1,17 +1,18 @@
 import os
 import random
-import argparse
 
 import numpy as np
 import torch
+from config import model_name
+import importlib
 
-def init_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--data", default="./data/MINDlarge_dev.zip", type=str)
-    parser.add_argument("--gpu", default="0", type=str)
-    parser.add_argument("--seed", default=2023, type=int)
-
-    return parser.parse_args()
+from train import train_run
+from test import test_run
+try:
+    config = getattr(importlib.import_module('config'), f"{model_name}Config")
+except AttributeError:
+    print(f"{model_name} not included!")
+    exit()
 
 def seed_torch(seed=2023):
     random.seed(seed)
@@ -25,7 +26,11 @@ def seed_torch(seed=2023):
 
 
 if __name__ == "__main__":
-    args = init_args()
-    seed_torch(args.seed)
-    os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
+    seed_torch(config.seed)
+    os.environ['CUDA_VISIBLE_DEVICES'] = config.gpu
+    if config.task == "train":
+        train_run(config)
+    else:
+        test_run()
+
     

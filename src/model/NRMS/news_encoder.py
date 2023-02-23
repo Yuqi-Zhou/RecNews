@@ -8,6 +8,7 @@ class NewsEncoder(torch.nn.Module):
     def __init__(self, config, pretrained_word_embedding):
         super(NewsEncoder, self).__init__()
         self.config = config
+        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         if pretrained_word_embedding is None:
             self.word_embedding = nn.Embedding(config.num_words,
                                                config.word_embedding_dim,
@@ -32,7 +33,7 @@ class NewsEncoder(torch.nn.Module):
             (shape) batch_size, word_embedding_dim
         """
         # batch_size, num_words_title, word_embedding_dim
-        news_vector = F.dropout(self.word_embedding(news["title"].to(device)),
+        news_vector = F.dropout(self.word_embedding(news["title"].to(self.device)),
                                 p=self.config.dropout_probability,
                                 training=self.training)
         # batch_size, num_words_title, word_embedding_dim
