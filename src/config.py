@@ -13,14 +13,14 @@ class BaseConfig():
     """
     General configurations appiled to all models
     """
-    num_epochs = 10
+    num_epochs = 2
     num_batches_show_loss = 100  # Number of batchs to show loss
     # Number of batchs to check metrics on validation dataset
     gpu = "1"
-    task = "train"
+    task = "test"
     seed = 2023
     num_batches_validate = 1000
-    batch_size = 32 # 128
+    batch_size = 128 # 128
     lr = 0.0001
     weight_decay = 1e-6
     num_workers = 4 # 4  # Number of workers for data loading
@@ -52,7 +52,7 @@ class NRMSConfig(BaseConfig):
 
 
 class NAMLConfig(BaseConfig):
-    if add_query is False:
+    if add_query is True:
         dataset_attributes = {
             "news": ['category', 'subcategory', 'title', 'abstract'],
             "record": []
@@ -62,6 +62,7 @@ class NAMLConfig(BaseConfig):
             "news": ['title', 'abstract'],
             "record": []
         }
+    print(dataset_attributes)
     # For CNN
     num_filters = 300
     window_size = 3

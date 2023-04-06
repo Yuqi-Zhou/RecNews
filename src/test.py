@@ -34,7 +34,7 @@ class Tester:
         for batch in tqdm(news_dataloader, desc="Calculating vectors for news"):
             news_ids =  batch["id"] # batch, 1
             if any(id not in news2vector for id in news_ids):
-                news_vector = self.model.get_news_vector(batch)
+                news_vector = self.model.get_news_vector(batch["news"])
                 for id, vector in zip(news_ids, news_vector):
                     if id not in news2vector:
                         news2vector[id] = vector.to('cpu')
@@ -88,7 +88,7 @@ class Tester:
         return np.nanmean(aucs), np.nanmean(mrrs), np.nanmean(ndcg5s), np.nanmean(ndcg10s)    
         
 def test_run():
-    state = torch.load("./save/NRMS/epoch1-loss1.06826-score0.69172.pt")
+    state = torch.load("./save/{}/query-epoch1-loss1.17590-score0.62236.pt".format(model_name))
     pretrained_word_embedding = torch.from_numpy(
             np.load('data/small_train/pretrained_word_embedding.npy')).float()
     config = state["config"]
